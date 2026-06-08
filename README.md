@@ -12,8 +12,10 @@ What it does?
 The orchestrator routes each question, calls the right tool, and synthesizes the result. 
 The SQL tool and RAG tool never talk to each other only the orchestrator sees both outputs
 
-Architecture
-text
+
+### Architecture
+
+```text
 ┌─────────────────────┐
 │ ClinicalTrials.gov  │
 │        API          │
@@ -40,7 +42,7 @@ text
 │ Vector Store        │
 └──────────┬──────────┘
            │
-           │
+
 ┌──────────▼──────────┐
 │ Structured Data     │
 │ Spark SQL Table     │
@@ -61,6 +63,16 @@ text
 │        ↓                        │
 │    Final Answer                 │
 └─────────────────────────────────┘
+```
+
+Dataset
+
+- Source: ClinicalTrials.gov API
+- Domain: PTSD (Post-Traumatic Stress Disorder) clinical trials
+- Structured metadata stored in Spark SQL tables
+- Unstructured study descriptions embedded using MiniLM
+- Vector embeddings stored in ChromaDB
+- Hybrid retrieval using SQL + RAG
 
 Dataset:
 - Source: ClinicalTrials.gov public API
